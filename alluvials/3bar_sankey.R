@@ -2,9 +2,10 @@
 # library(haven)
 # cces <- read_dta("cces_panel.dta")
 # 
-# library(fst)
+ 
 # write.fst(cces, "cces_panel.fst")
 
+library(fst)
 
 cces <- read.fst("C://cces_panel.fst")
 

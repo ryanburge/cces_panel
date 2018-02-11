@@ -94,7 +94,7 @@ small %>%
 ggsave(file="3bar_ba_nonba_300.png", type = "cairo-png", width = 18, height = 21, dpi= 300)
 
 cces %>% 
-  filter(religpew_14 ==2) %>% 
+  filter(religpew_10 ==2) %>% 
   filter(religpew_14 != 12) %>% 
   tabyl(religpew_10)
 

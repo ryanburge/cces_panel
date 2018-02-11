@@ -15,8 +15,9 @@ test<- test %>%
   filter(all(value != "12")) %>% 
   ungroup(caseid)
 
+
 test <- test %>% 
-  mutate(value = fct_relevel(value, "Agnostic", "Atheist", "Nothing", "Catholic", "Protestant", "Orthodox", "Mormon", "Jewish", "Hindu", "Muslim", "Buddhist"))
+  mutate(value = fct_relevel(value, "Agnostic", "Atheist", "Nothing",  "Catholic", "Protestant", "Orthodox", "Mormon", "Jewish", "Hindu", "Muslim", "Buddhist"))
 
 
 test <- test %>% 
