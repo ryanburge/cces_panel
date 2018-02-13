@@ -46,8 +46,8 @@ a <- bind_cols(a1, a2) %>%
 
 a <- as.tibble(a)
 
-a <- add_row(a, religpew = "Born Again Protestant", year10 = .2275, year14 = .2247, .before = 1)
-a <- add_row(a, religpew = "Not Born Again Protestant", year10 = .2098, year14 = .1945, .before = 3)
+a <- add_row(a, religpew = "Evangelical Protestant", year10 = .186, year14 = .2072632, .before = 1)
+a <- add_row(a, religpew = "Mainline Protestant", year10 = .2098, year14 = .1945, .before = 3)
 
 a <- a %>% 
   mutate(pct10 = round(year10*100, 2)) %>% 
@@ -58,8 +58,8 @@ a$pct10c <- paste(a$pct10, "%", sep = "")
 a$pct14c <- paste(a$pct14, "%", sep = "")
 
 
-left_label <- paste(a$religpew, a$pct10c,sep=", ")
-right_label <- paste(a$religpew, a$pct14c,sep=", ")
+left_label <- paste(a$religpew, a$pct10c,sep=" - ")
+right_label <- paste(a$religpew, a$pct14c,sep=" - ")
 
 
 a$class <- ifelse((a$pct14 - a$pct10) < 0, "red", "green")
@@ -89,6 +89,8 @@ p + theme(panel.background = element_blank(),
             axis.text.x = element_blank(),
             panel.border = element_blank(),
             plot.margin = unit(c(1,2,1,2), "cm")) +
-  labs(title = "Overall Shifts in Religious Population Size (2010-2014)", subtitle = "Does Not Consider Gains/Losses Through Birth or Death", caption = "Data: CCES Panel (2010-2014)")
+  labs(title = "Overall Shifts in Religious Population Size (2010-2014)", subtitle = "Does Not Consider Gains/Losses Through Birth or Death", caption = "Data: CCES Panel (2010-2014)") + 
+  theme(plot.title = element_text(size=72))
+
 
 ggsave(file="slop.png", type = "cairo-png", width = 30, height = 21)
