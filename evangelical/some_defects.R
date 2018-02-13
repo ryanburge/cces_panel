@@ -86,6 +86,11 @@ jew <- gss %>%
   
 
 
+my.cols <- brewer.pal(7, "Set1")
+my.cols[6] <- "#A65628"
+
+
+
 long <- bind_rows(sbc, umc, bdk, other) %>% select(year, pct, group)
 long <- bind_rows(long, cath, jew)
 
@@ -95,10 +100,10 @@ long %>%
   scale_y_continuous(labels = scales::percent) +
   # geom_point(aes(colour = group), size =2, shape =21, stroke =1.5, show.legend = F) +
   labs(x= "Year", y = "Percent of Tradition that Defected", title = "The Defection Rate of Major Religious Traditions", subtitle = "Comparing Religion at 16 Years Old to Adult Religion", caption = "Data: GSS (1972-2016)") +
-  scale_color_brewer(palette = "Set1") + theme(legend.text=element_text(size=36)) + theme(plot.title = element_text(size=64))
+  scale_fill_manual(values = rev(my.cols)) + theme(legend.text=element_text(size=36)) + theme(plot.title = element_text(size=64))
 
 
-ggsave(file="D://cces_panel/defect_long_cces.png", type = "cairo-png", width = 21, height = 15)
+ggsave(file="D://cces_panel/defect_long_gss.png", type = "cairo-png", width = 21, height = 15)
 
 
 
