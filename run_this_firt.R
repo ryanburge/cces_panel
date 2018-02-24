@@ -1,4 +1,20 @@
 
+library(fst)
+
+cces <- read.fst("C://cces_panel.fst")
+
+library(tidyverse)
+library(car)
+library(janitor)
+library(reshape2)
+library(ggalluvial)
+library(extrafont)
+
+source("D://cces/ggthemes.R")
+
+
+
+
 cces <- cces %>% 
   mutate(prot_10 = religpew_protestant_10 + 100) %>% 
   mutate(bapt_10 = religpew_baptist_10 + 200)
