@@ -56,7 +56,7 @@ def %>%
   scale_y_continuous(labels = scales::percent) + facet_grid(label ~ .)  +
   flip_bar_rb() +  
   guides(fill = guide_legend(reverse = TRUE)) + 
-  labs(x= "", y = "Percent of the Population", title = "How Does a Born Again Identity Reduce Defection?", subtitle = "How Religious Affiliation Shifts in 2014 Depending on Born Again Status in 2010", caption = "Data: CCES Panel (2010-2014)")  + 
+  labs(x= "", y = "", title = "How Does a Born Again Identity Reduce Defection?", subtitle = "How Religious Affiliation Shifts in 2014 Depending on Born Again Status in 2010", caption = "Data: CCES Panel (2010-2014)")  + 
   scale_fill_brewer(palette = "Spectral")
 
 ggsave(file="ba_nonba_defect.png", type = "cairo-png", width = 21, height = 12)
@@ -98,7 +98,25 @@ cces %>%
   filter(religpew_14 != 12) %>% 
   tabyl(religpew_10)
 
-cces 
+## Making Blanks
+
+
+def %>% 
+  filter(pct > .01) %>% 
+  ggplot(., aes(1, pct)) + geom_col(aes(fill= fct_rev(relig)), colour = "black") + coord_flip() + 
+  theme(axis.title.y = element_blank()) + 
+  theme(axis.ticks = element_blank(), axis.text.y = element_blank()) + ylab("") + 
+  scale_y_continuous(labels = scales::percent) + facet_grid(label ~ .)  +
+  flip_bar_rb() +  
+  guides(fill = guide_legend(reverse = TRUE)) + 
+  labs(x= "", y = "", title = "", subtitle = "", caption = "")  + 
+  scale_fill_brewer(palette = "Spectral") + 
+  theme(axis.title.x=element_blank(),axis.text.x=element_blank()) +
+  theme(axis.title.y=element_blank(),axis.text.y=element_blank()) + 
+  theme(strip.background = element_blank(), strip.text.y = element_blank()) + theme(legend.position="none") +
+  theme(plot.margin=unit(c(2,2,3.5,3.5),"cm"))
+
+ggsave(file="ba_nonba_defect_blank.png", type = "cairo-png", width = 21, height = 12) 
 
 
 

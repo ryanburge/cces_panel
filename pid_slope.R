@@ -76,3 +76,43 @@ p + theme(panel.background = element_blank(),
 
 ggsave(file="slope_pid.png", type = "cairo-png", width = 30, height = 21)
 
+## blanks 
+
+
+
+windowsFonts(Times=windowsFont("Product Sans"))
+
+p <- ggplot(com) + geom_segment(aes(x=1, xend=2, y=mean, yend=mean1, col=class), size=.75, show.legend=F) + 
+  geom_vline(xintercept=1, linetype="dashed", size=.1) + 
+  geom_vline(xintercept=2, linetype="dashed", size=.1) +
+  scale_color_manual(labels = c("Up", "Down"), 
+                     values = c("blue"="dodgerblue3", "red"="#f8766d")) +  # color of lines
+  labs(x="", y="") +  # Axis labels
+  xlim(.5, 2.5) + ylim(0,(1.1*(max(com$mean, com$mean1)))) + 
+  # scale_y_continuous(limits = c(1,3.9), breaks = c(0,1,2,3,4,5,6), labels = c("Strong Democrat", "Not Strong Democrat", "Ind., Near Dem.", "Independent", "Not Strong Republican", "Moderate Republican", "Strong Republican")) +
+  theme(text=element_text(size=32, family="Product Sans"))  # X and Y axis limits
+
+p <- p + geom_text(label=left_label, y=com$mean, x=rep(1, NROW(com)), hjust=1.1, size=10.5, family= "Product Sans")
+p <- p + geom_text(label=right_label, y=com$mean1, x=rep(2, NROW(com)), hjust=-0.1, size=10.5, family= "Product Sans")
+
+
+p <- p + geom_text(label="1972", x=1, y= 1.1*(max(com$mean, com$mean1)), size=16, family= "Product Sans")  # title
+p <- p + geom_text(label="2016", x=2, y= 1.1*(max(com$mean, com$mean1)), size=16, family= "Product Sans")  # title
+
+
+
+
+p + theme(panel.background = element_blank(), 
+          panel.grid = element_blank(),
+          axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          panel.border = element_blank(),
+          plot.margin = unit(c(1,2,1,2), "cm")) +
+  labs(title = "", subtitle = "", caption = "") + 
+  theme(plot.title = element_text(size=72)) +
+  theme(axis.title.x=element_blank(),axis.text.x=element_blank()) +
+  theme(axis.title.y=element_blank(),axis.text.y=element_blank())
+
+
+ggsave(file="slope_pid_blank.png", type = "cairo-png", width = 30, height = 21)
+
